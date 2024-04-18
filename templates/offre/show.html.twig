@@ -1,0 +1,48 @@
+
+{% extends 'template.html.twig' %}
+
+{% block title %}Stages{% endblock %}
+
+{% block PageTitle %}Nouvelle demande{% endblock %}
+
+{% block body %}
+
+
+<div class="container-fluid" >
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+<div class="card-body table-responsive">
+<div class="container" >
+   <form action="" enctype="multipart/form-data" method="POST" role="form" class="php-email-form" style="width:700px" >
+     <div class="row">
+                          
+          
+                       <div class="col-md-12 form-group mt-6 mt-md-3">
+                       <label>Nombres de places réservées:</label>
+                        {{offre.nombre}}
+                       </div>
+          
+                          <div class="col-md-12 form-group mt-6 mt-md-3">
+                          <labe>Domaine:</label>
+                            {{offre.domaine}}
+                          </div><br>
+          
+                          <div class="col-md-12 form-group mt-6 mt-md-3">
+                          <label>Objet:</label>
+                            {{offre.objet}}
+                          </div>
+                          <div class="col-md-12 form-group mt-6 mt-md-3">
+                          <label>Date de début:</label>
+                            {{offre.dateDebut|date('d/m/Y')}}
+                          </div>
+
+                          <div class="col-md-12 form-group mt-6 mt-md-3">
+                          <label>Date de Fin:</label>
+                            {{offre.dateFin|date('d/m/Y')}}
+                          </div>
+          
+                        
+                    </div>
+                    </div>
+                    </div>
+{% endblock %}

@@ -1,0 +1,214 @@
+
+<div class="pcoded-main-container">
+
+
+{% if app.user.type == 'Etudiant' %}
+<div class="pcoded-wrapper">
+    <nav class="pcoded-navbar">
+        <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
+        <div class="pcoded-inner-navbar main-menu">
+            <div class="">
+                <div class="main-menu-header">
+                <img src="{{asset('uploads/users/'~ app.user.image)}}" alt="" width="20%">
+                    <div class="user-details">
+                   
+                        <span>{{app.user.nom ~" "~ app.user.prenom}}</span>
+                        <span id="more-details">Profile<i class="ti-angle-down"></i></span>
+                    </div>
+                </div>
+
+                <div class="main-menu-content">
+                    <ul>
+                        <li class="more-details">
+                    <a href="{{path('app_profile')}}"><i class="ti-user"></i>Voir mon Profile</a>
+                    
+                    <a href="{{path('app_logout')}}"><i class="ti-layout-sidebar-left"></i>Logout</a>
+                </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pcoded-search">
+                <span class="searchbar-toggle">  </span>
+                <div class="pcoded-search-box ">
+                    <input type="text" placeholder="Search">
+                    <span class="search-icon"><i class="ti-search" aria-hidden="true"></i></span>
+                </div>
+            </div>
+            <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Layout</div>
+            <ul class="pcoded-item pcoded-left-item">
+                <li class="active">
+                    <a href="{{path('app_dashboard')}}">
+                        <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
+                        <span class="pcoded-mcaret"></span>
+                    </a>
+                </li>
+                <li >
+                    <a href="{{path('app_stage')}}">
+                        <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
+                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Demande de stage</span>
+                        
+                    </a>
+                  
+                </li>
+                <li >
+                    <a href="{{path('app_attestation')}}">
+                        <span class="pcoded-micon"><i class="ti-list"></i></span>
+                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Demande d'attestation de stage</span>
+                        
+                    </a>
+                </li>
+                <li >
+                    <a href="{{path('liste_offre')}}">
+                        <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
+                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Liste des offres de stage</span>
+                        
+                    </a>
+                </li>
+            </ul>
+            
+            
+        </div>
+    </nav>
+
+
+
+    
+   
+
+    
+{% elseif app.user.type == "Entreprise" %}
+<div class="pcoded-wrapper">
+<nav class="pcoded-navbar">
+<div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
+<div class="pcoded-inner-navbar main-menu">
+    <div class="">
+        <div class="main-menu-header">
+        <img src="{{asset('uploads/users/'~ app.user.image)}}" alt="" width="20%" class="rounded-circle">
+            <div class="user-details">
+           
+                <span>{{app.user.nom}}</span>
+                <span id="more-details">Profile<i class="ti-angle-down"></i></span>
+            </div>
+        </div>
+
+        <div class="main-menu-content">
+            <ul>
+                <li class="more-details">
+                    <a href="{{path('app_profile')}}"><i class="ti-user"></i>Voir mon profile</a>
+                    
+                    <a href="{{path('app_logout')}}"><i class="ti-layout-sidebar-left"></i>Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="pcoded-search">
+        <span class="searchbar-toggle">  </span>
+        <div class="pcoded-search-box ">
+            <input type="text" placeholder="Search">
+            <span class="search-icon"><i class="ti-search" aria-hidden="true"></i></span>
+        </div>
+    </div>
+    <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Layout</div>
+    <ul class="pcoded-item pcoded-left-item">
+        <li class="active">
+            <a href="{{path('app_dashboard')}}">
+                <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
+                <span class="pcoded-mcaret"></span>
+            </a>
+        </li>
+        <li >
+            <a href="{{path('app_offre')}}">
+                <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
+                <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Publier une offre</span>
+                
+            </a>
+          
+        </li>
+        <li >
+            <a href="{{path('app_liste_stage')}}">
+                <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
+                <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Demande estudiantine</span>
+                
+            </a>
+        </li>
+        <li >
+            <a href="{{path('liste_attestation')}}">
+                <span class="pcoded-micon"><i class="ti-eye-alt"></i></span>
+                <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Demande d'attestation</span>
+                
+            </a>
+        </li>
+    </ul>
+    
+    
+</div>
+</nav>
+
+{% elseif  app.user.type == 'Universite' %}
+<div class="pcoded-wrapper">
+<nav class="pcoded-navbar">
+<div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
+<div class="pcoded-inner-navbar main-menu">
+    <div class="">
+        <div class="main-menu-header">
+        <img src="{{asset('uploads/users/'~ app.user.image)}}" alt="" width="20%">
+            <div class="user-details">
+           
+            
+           
+                <span>{{app.user.nom}}</span>
+                <span id="more-details">Profile<i class="ti-angle-down"></i></span>
+            </div>
+        </div>
+
+        <div class="main-menu-content">
+            <ul>
+                <li class="more-details">
+                    <a href="{{path('app_profile')}}"><i class="ti-user"></i>Voir mon profile</a>
+                    
+                    <a href="{{path('app_logout')}}"><i class="ti-layout-sidebar-left"></i>Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="pcoded-search">
+        <span class="searchbar-toggle">  </span>
+        <div class="pcoded-search-box ">
+            <input type="text" placeholder="Search">
+            <span class="search-icon"><i class="ti-search" aria-hidden="true"></i></span>
+        </div>
+    </div>
+    <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Layout</div>
+    <ul class="pcoded-item pcoded-left-item">
+        <li class="active">
+            <a href="{{path('app_dashboard')}}">
+                <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
+                <span class="pcoded-mcaret"></span>
+            </a>
+        </li>
+        <li >
+            
+          
+        </li>
+        <li >
+            
+        </li>
+        <li >
+            <a href="{{path('liste_offre')}}">
+                <span class="pcoded-micon"><i class="ti-list"></i></span>
+                <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Liste des offres de stage</span>
+                
+            </a>
+        </li>
+    </ul>
+    
+    
+</div>
+</nav>
+
+
+{% endif %}
+</div>

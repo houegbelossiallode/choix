@@ -1,0 +1,54 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Stages{% endblock %}
+
+{% block PageTitle %}Nouvelle demande{% endblock %}
+
+{% block body %}
+
+
+            <div class="container-fluid" >
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+            <div class="card-body table-responsive">
+            <div class="container" >
+            <form action="" enctype="multipart/form-data" method="POST" role="form" class="php-email-form" style="width:700px" >
+                
+                    {{ form_start(form) }}
+                    <div class="row">
+
+                    <div class="col-6">{{ form_row(form.cv) }}</div>
+                    <div class="col-6"> {{ form_row(form.nombre) }} </div>
+
+                    </div>
+
+                    <div class="row">
+
+                    <div class="col-6">{{ form_row(form.objet) }}</div>
+                    <div class="col-6">{{ form_row(form.dmaine) }}</div>
+
+                    </div>
+
+
+
+                    <div class="row">
+
+                    <div class="col-6">{{ form_row(form.date_fin) }}</div>
+                    <div class="col-6">{{ form_row(form.entreprise,{'attr': {'class': 'form-control'}}) }}</div>
+
+                    </div>
+                    {{ form_rest(form) }}
+
+                    <a href="{{path('app_stage')}}">Listes des demandes de stages</a>
+                </div>
+           
+            </form>
+     </div>
+    </div>
+    </div>
+    </div>
+</div>
+{% endblock %}
+
+
+

@@ -1,0 +1,65 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Hello StageController!{% endblock %}
+
+{% block body %}
+
+
+
+
+
+<div class="container-fluid" >
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+<div class="card-body table-responsive">
+<div class="container" >
+   <form action="" enctype="multipart/form-data" method="POST" role="form" class="php-email-form" style="width:700px" >
+     <div class="row">
+                                  <table class="table table-bordered table-striped table-highlight">
+                                
+                                                    <thead>
+                                                        <tr>
+                                                          
+                                                        <th>Nombre</th>
+                                                        <th>Domaine</th>
+                                                        <th>Objet</th>
+                                                        
+                                                        <th>Date de debut</th>
+                                                        <th>Date de fin</th>
+                                                        <th>POSTULER</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for offre in offres %}
+                                                        <tr>
+                                                            
+                                                        <td>{{offre.nombre}}</td>
+                                                        <td> {{offre.domaine}} </td>
+                                                        <td> {{offre.objet}} </td>
+                                                        
+                                                        <td> {{offre.dateDebut|date("d/m/Y")}} </td>
+                                                        <td> {{offre.dateFin|date("d/m/Y")}} </td>
+                                                            <td>
+                                                            <a href="{{path('postuler', {id : offre.id} )}}" class="text-success" >POSTULER</a>
+                                                            </td>
+                                                       </tr>
+                                                    {% endfor %}
+                                                            
+                                                        
+                                                    </tbody>
+                                                </table>
+                                            
+                                        </div>
+                                    </form>
+
+
+
+                                
+
+
+
+
+
+
+{% endblock %}
+

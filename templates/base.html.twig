@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <!-- Mobile Metas -->
+         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+         <meta name="keywords" content="">
+         <meta name="description" content="">
+         <meta name="author" content="">
+          <!-- Site Icons -->
+    <link rel="shortcut icon" href="#" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="#" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <!-- Feuilles de styles -->
+        <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/css/pogo-slider.min.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/css/styles.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/css/responsive.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/css/custom.css')}}">
+       
+       
+        {% block stylesheets %}
+       
+        {% endblock %}
+
+        {% block javascripts %}
+           
+        {% endblock %}
+    </head>
+
+    <body>
+
+     
+
+        {% block body %}{% endblock %}
+
+        
+
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/js/popper.min.js') }}"></script>
+<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/js/jquery.magnific-popup.min.js') }}"></script>
+<script src="{{ asset('assets/js/jquery.pogo-slider.min.js') }}"></script>
+<script src="{{ asset('assets/js/slider-index.js') }}"></script>
+<script src="{{ asset('assets/js/smoothscroll.js') }}"></script>
+<script src="{{ asset('assets/js/form-validator.min.js') }}"></script>
+<script src="{{ asset('assets/js/contact-form-script.js') }}"></script>
+<script src="{{ asset('assets/js/isotope.min.js') }}"></script>
+<script src="{{ asset('assets/js/images-loded.min.js') }}"></script>
+<script src="{{ asset('assets/js/custom.js') }}"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,66 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Hello StageController!{% endblock %}
+
+{% block body %}
+
+
+<div class="container-fluid" >
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+<div class="card-body table-responsive">
+<div class="container" >
+   <form action="" enctype="multipart/form-data" method="POST" role="form" class="php-email-form" style="width:700px" >
+     <div class="row">
+                                  <table class="table table-bordered table-striped table-highlight">
+                                
+                                                    <thead>
+                                                        <tr>
+                                                          
+                                                        
+                                                        <th>Nom</th>
+                                                        <th>Prénom</th>
+                                                        <th>Ecole</th>
+                                                        <th>Contrat de stage</th>
+                                                        <th>Carte Scolaire</th>
+                                                        <th>Date de Création</th>
+                                                        <th>Action 1</th>
+                                                        
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for attestation in attestations %}
+                                                        <tr>
+                                                            
+                                                        <td>{{attestation.etudiant.nom}}</td>
+                                                        <td> {{attestation.etudiant.prenom}} </td>
+                                                        
+                                                        <td> {{attestation.etudiant.ecole}} </td>
+                                                        
+                                                       <td> <img src="{{asset('uploads/users/'~ attestation.contratStage)}}" alt="" width="50%"> </td>
+                                                       <td> <img src="{{asset('uploads/users/'~ attestation.carteScolaire)}}" alt="" width="50%"> </td>
+                                                       <td> {{attestation.createdAt|date("d/m/Y")}} </td>
+                                                        <td>
+                                                        <a href="{{path('liste_attestation_show', {id : attestation.id})}}" class="btn btn-primary">Détails</a>
+                                                        </td>
+                                                        
+                                                    </tr>
+                                                    {% endfor %}
+                                                            
+                                                        
+                                                    </tbody>
+                                                </table>
+                                            
+                                        </div>
+                                    </form>
+
+
+
+                                
+
+
+
+
+
+
+{% endblock %}

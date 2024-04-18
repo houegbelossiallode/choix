@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Acteur{% endblock %}
+
+
+
+{% block body %}
+
+  
+ 
+ {% if  app.request.get('type') == 'etudiant' %}
+    
+    {{ include('user/register_etudiant.html.twig')}}
+  
+{% elseif app.request.get('type')=="entreprise"%}
+  
+    {{ include('user/register_entreprise.html.twig') }}
+  
+    {% elseif app.request.get('type')=="universite"%}
+  
+    {{ include('user/register_universite.html.twig') }}
+  
+
+{% else %}
+
+    {{ include('user/acteur.html.twig') }}
+    
+
+   
+
+{% endif %}
+
+{% endblock %}

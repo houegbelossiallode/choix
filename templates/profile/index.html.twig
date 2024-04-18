@@ -1,0 +1,178 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Mon profile{% endblock %}
+
+{% block body %}
+
+
+{% if app.user.type == 'Etudiant' %}
+<div class="container-fluid" >
+<div class="card shadow mb-4">
+ <div class="card-header py-3">
+<div class="card-body table-responsive">
+<div class="container" >
+   <form action="" enctype="multipart/form-data" method="POST" role="form" class="php-email-form" style="width:700px" >
+     <div class="row">
+     <table class="table table-bordered table-striped table-highlight">
+    <table class="table ps-table">
+    <thead>
+    <tr>
+    
+    
+    <th>Nom</th>
+    <th>Prénom</th>
+    <th>Email</th>
+    <th>Photo</th>
+    <th>Adresse</th>
+    <th>Date de Naissance</th>
+    <th>Filière</th>
+    <th>Sexe</th>
+    <th>Ecole</th>
+    <th>Action</th>
+    </tr>
+    
+    </thead>
+
+
+<tbody>
+{% for profile in profiles %}
+    
+    <tr>
+    <td> {{profile.nom}} </td>
+    <td> {{profile.prenom}} </td>
+    <td> {{profile.email}} </td>
+    <td> <img src="{{asset('uploads/users/'~ profile.image)}}" alt="" width="50%"> </td>
+    <td> {{profile.adresse}} </td>
+    <td> {{profile.datenaissance|date('d/m/Y')}} </td>
+    <td> {{profile.filiere}} </td>
+    <td> {{profile.sexe}} </td>
+    <td> {{profile.ecole}} </td>
+    <td>
+    <a href="{{ path('profile_edit', {id : profile.id} )}}" class="btn btn-primary">MODIFIER</a>
+    </td>
+    
+
+    </tr>
+
+    {% endfor %}
+</tbody>
+
+
+</table>
+</div>
+</div>
+
+{% elseif app.user.type == 'Entreprise' %}
+
+<div class="container-fluid" >
+<div class="card shadow mb-4">
+ <div class="card-header py-3">
+<div class="card-body table-responsive">
+<div class="container" >
+   <form action="" enctype="multipart/form-data" method="POST" role="form" class="php-email-form" style="width:700px" >
+     <div class="row">
+     <table class="table table-bordered table-striped table-highlight">
+    <table class="table ps-table">
+    <thead>
+    <tr>
+    
+    
+    <th>Nom</th>
+ 
+    <th>Email</th>
+    <th>Photo</th>
+    <th>Numéro IFU</th>
+    <th>Régistre de commerce</th>
+  
+    <th>Action</th>
+    </tr>
+    
+    </thead>
+
+
+<tbody>
+{% for profile in profiles %}
+    
+    <tr>
+    <td> {{profile.nom}} </td>
+    <td> {{profile.email}} </td>
+    <td> <img src="{{asset('uploads/users/'~ profile.image)}}" alt="" width="50%"> </td>
+    <td> <img src="{{asset('uploads/users/'~ profile.ifu)}}" alt="" width="50%"> </td>
+    <td> <img src="{{asset('uploads/users/'~ profile.rccm)}}" alt="" width="50%"> </td>
+    <td>
+    <a href="{{ path('profile_edit', {id : profile.id} )}}" class="btn btn-primary">MODIFIER</a>
+    </td>
+    
+
+    </tr>
+
+    {% endfor %}
+</tbody>
+
+
+</table>
+</div>
+</div>
+
+
+{% elseif app.user.type == 'Universite' %}
+
+<div class="container-fluid" >
+<div class="card shadow mb-4">
+ <div class="card-header py-3">
+<div class="card-body table-responsive">
+<div class="container" >
+   <form action="" enctype="multipart/form-data" method="POST" role="form" class="php-email-form" style="width:700px" >
+     <div class="row">
+     <table class="table table-bordered table-striped table-highlight">
+    <table class="table ps-table">
+    <thead>
+    <tr>
+    
+    
+    <th>Nom</th>
+    <th>Prénom</th>
+    <th>Email</th>
+    <th>Photo</th>
+    <th>Adresse</th>
+    <th>Date de Naissance</th>
+    <th>Filière</th>
+    <th>Sexe</th>
+    <th>Ecole</th>
+    <th>Action</th>
+    </tr>
+    
+    </thead>
+
+
+<tbody>
+{% for profile in profiles %}
+    
+    <tr>
+    <td> {{profile.nom}} </td>
+    <td> {{profile.email}} </td>
+    <td> <img src="{{asset('uploads/users/'~ profile.image)}}" alt="" width="50%"> </td>
+    <td> <img src="{{asset('uploads/users/'~ profile.ifu)}}" alt="" width="50%"> </td>
+    <td> {{profile.NumEnregistrement}} </td>
+    <td>
+    <a href="{{ path('profile_edit', {id : profile.id} )}}" class="btn btn-primary">MODIFIER</a>
+    </td>
+    
+
+    </tr>
+
+    {% endfor %}
+</tbody>
+
+
+</table>
+</div>
+</div>
+{% endif %}
+{% endblock %}
+
+
+
+
+
+

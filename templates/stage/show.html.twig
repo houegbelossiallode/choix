@@ -1,0 +1,47 @@
+
+{% extends 'template.html.twig' %}
+
+{% block title %}Stages{% endblock %}
+
+{% block PageTitle %}Nouvelle demande{% endblock %}
+
+{% block body %}
+
+
+<div class="container-fluid" >
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+<div class="card-body table-responsive">
+<div class="container" >
+   <form action="" enctype="multipart/form-data" method="POST" role="form" class="php-email-form" style="width:700px" >
+     <div class="row">
+                          <div class="col-md-12 form-group mt-6 mt-md-3">
+                          <label>Curriculum Vitae:</label>
+                            <img src="{{asset('uploads/users/'~ stage.cv)}}" alt="" >
+                          </div><br>
+          
+                       <div class="col-md-12 form-group mt-6 mt-md-3">
+                       <label>Nombres de places réservées:</label>
+                        {{stage.nombre}}
+                       </div>
+          
+                          <div class="col-md-12 form-group mt-6 mt-md-3">
+                          <labe>Domaine:</label>
+                            {{stage.dmaine}}
+                          </div><br>
+          
+                          <div class="col-md-12 form-group mt-6 mt-md-3">
+                          <label>Objet:</label>
+                            {{stage.objet}}
+                          </div>
+          
+                          
+                      
+
+
+
+                        
+                    </div>
+                    </div>
+                    </div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Hello DashboardController!{% endblock %}
+
+{% block body %}
+
+ 
+{% if app.user.type == 'Etudiant' %}
+    
+{{ include('dashboard/etudiant.html.twig')}}
+
+{% elseif app.user.type == 'Entreprise' %}
+
+{{ include('dashboard/entreprise.html.twig')}}  
+
+{% elseif app.user.type == 'Universite' %}
+
+{{ include('dashboard/universite.html.twig') }}
+
+{% endif %}
+
+
+
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ContactController!{% endblock %}
+
+{% block body %}
+
+{% include 'partial/header.html.twig' %}
+
+<!-- section -->
+<div class="section layout_padding padding_bottom-0">
+ <div class="container">
+     <div class="row">
+         <div class="col-md-12">
+             <div class="full">
+                 <div class="heading_main text_align_center">
+                    <h2><span>Contact</span></h2>
+                 </div>
+               </div>
+         </div>
+       </div>
+    </div>
+ </div>
+
+
+<div class="section contact_section" style="background:#12385b;">
+    <div class="container">
+     
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-12">
+             <div class="full float-right_img">
+             <img src="{{ asset('assets/images/conta.jpg') }}" alt="#"  style="margin-top:115px;" />
+             </div>
+          </div>
+          <div class="layout_padding col-lg-6 col-md-6 col-sm-12">
+             <div class="contact_form">
+                 
+             {{ form_start(form) }}
+             <fieldset>
+                 <div class="full field">
+                 <input type="text" placeholder="Votre Nom" name="{{field_name(form.nom)}}" required />
+               </div>
+               
+             <div class="full field">
+                <input type="email" placeholder="Votre Adresse email" name="{{field_name(form.email)}}" required />
+             </div>
+             <div class="full field">
+                <input type="number" placeholder="Numero de telephone" name="{{field_name(form.numero)}}" required />
+             </div>
+             <div class="full field">
+                <textarea placeholder="Message" name="{{field_name(form.message)}}" required></textarea>
+             </div>
+             <div class="full field">
+                <div class="center"><button type="submit">ENVOYER</button></div>
+             </div>
+             </fieldset>
+          
+             {{ form_rest(form) }}
+                
+                
+             </div>
+          </div>
+        </div>			  
+    </div>
+    
+ </div>
+
+ {% include 'partial/footer.html.twig' %}
+
+{% endblock %}

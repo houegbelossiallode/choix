@@ -1,0 +1,72 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Hello StageController!{% endblock %}
+
+{% block body %}
+
+
+
+
+
+<div class="container-fluid" >
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+<div class="card-body table-responsive">
+<div class="container" >
+   <form action="" enctype="multipart/form-data" method="POST" role="form" class="php-email-form" style="width:700px" >
+     <div class="row">
+                                  <table class="table table-bordered table-striped table-highlight">
+                                <a href="{{ path('add_stage') }}" class="btn btn-success mb-2">Nouvelle demande</a>
+                                                    <thead>
+                                                        <tr>
+                                                          
+                                                        <th>Nombre</th>
+                                                        <th>Domaine</th>
+                                                        <th>Objet</th>
+                                                        <th>Entreprise</th>
+                                                        <th>Date de fin</th>
+                                                        <th>cv</th>
+                                                        <th>Action 1</th>
+                                                        <th>Action 2</th>
+                                                        <th>Action 3</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for stage in stages %}
+                                                        <tr>
+                                                            
+                                                        <td>{{stage.nombre}}</td>
+                                                        <td> {{stage.dmaine}} </td>
+                                                        <td> {{stage.objet}} </td>
+                                                        <td> {{stage.entreprise.nom}} </td>
+                                                        <td> {{stage.dateFin|date("d/m/Y")}} </td>
+                                                       <td> <img src="{{asset('uploads/users/'~ stage.cv)}}" alt="" width="50%"> </td>
+                                                        <td>
+                                                        <a href="{{ path('stage_show', {id: stage.id} )}}" class="btn btn-primary">Détails</a>
+                                                        </td>
+                                                        <td>
+                                                        <a href="{{ path('stage_delete', {id : stage.id} )}} " class="btn btn-danger" >REMOVE</a>
+                                                        </td>
+                                                        <td>
+                                                        <a href="{{ path('stage_edit', {id : stage.id} )}} " class="btn btn-success" >MODIFIER</a>
+                                                        </td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                            
+                                                        
+                                                    </tbody>
+                                                </table>
+                                            
+                                        </div>
+                                    </form>
+
+
+
+                                
+
+
+
+
+
+
+{% endblock %}
