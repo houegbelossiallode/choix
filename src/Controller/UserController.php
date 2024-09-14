@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\EntrepriseType;
+use App\Form\EtudiantType;
 use App\Form\RegistrationFormType;
+use App\Form\UniversiteType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -43,7 +46,7 @@ class UserController extends AbstractController
           
                     
              return $this->render('user/new.html.twig', [
-                'registrationForm'=> $form->createView()
+                'form'=> $form->createView()
             ]); 
 
 
@@ -55,12 +58,11 @@ class UserController extends AbstractController
         public function etudiant(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager,SluggerInterface $slugger): Response
         {
             $user = new User();
-            $form = $this->createForm(RegistrationFormType::class, $user);
-            
-            $form->remove('num_enregistrement');
+            $form = $this->createForm(EtudiantType::class, $user);
             $form->remove('ifu');
             $form->remove('rccm');
-        
+            $form->remove('num_enregistrement');
+            
             $form->handleRequest($request);
             
                 if ($form->isSubmitted() && $form->isValid()) 
@@ -121,7 +123,7 @@ class UserController extends AbstractController
                     
     
                     return $this->render('user/register_etudiant.html.twig', [
-                        'registrationForm'=> $form->createView()
+                        'form'=> $form->createView()
                     ]); 
     
                     
@@ -133,14 +135,8 @@ class UserController extends AbstractController
                 public function entreprise(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager,SluggerInterface $slugger): Response
                 {
                     $user = new User();
-                    $form = $this->createForm(RegistrationFormType::class, $user);
-                    
-                    $form->remove('num_enregistrement');
-                    $form->remove('prenom');
-                    $form->remove('sexe');
-                    $form->remove('filiere');
-                    $form->remove('date_naissance');
-                    $form->remove('ecole');
+                    $form = $this->createForm(EntrepriseType::class, $user);
+                   
                     
                 
                     $form->handleRequest($request);
@@ -222,7 +218,7 @@ class UserController extends AbstractController
                             
             
                             return $this->render('user/register_entreprise.html.twig', [
-                                'registrationForm'=> $form->createView()
+                                'form'=> $form->createView()
                             ]); 
             
                             
@@ -234,17 +230,8 @@ class UserController extends AbstractController
                         public function universite(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager,SluggerInterface $slugger): Response
                         {
                             $user = new User();
-                            $form = $this->createForm(RegistrationFormType::class, $user);
+                            $form = $this->createForm(UniversiteType::class, $user);
                             
-                                $form->remove('ifu');
-                                $form->remove('prenom');
-                                $form->remove('sexe');
-                                $form->remove('filiere');
-                                $form->remove('date_naissance');
-                                $form->remove('ecole');
-                            
-                            
-                        
                             $form->handleRequest($request);
                             
                                 if ($form->isSubmitted() && $form->isValid()) 
@@ -319,7 +306,7 @@ class UserController extends AbstractController
                                     
                     
                                     return $this->render('user/register_universite.html.twig', [
-                                        'registrationForm'=> $form->createView()
+                                        'form'=> $form->createView()
                                     ]); 
                     
                                     

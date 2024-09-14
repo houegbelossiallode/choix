@@ -18,7 +18,7 @@
 {% endfor %}
 
         <h1>Inscription Universite</h1>
-        <form action="{{path('app_universite')}}" method="POST">
+        
         {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.image) }}
         {{ form_row(registrationForm.rccm) }}
@@ -28,7 +28,7 @@
         {{ form_row(registrationForm.email) }}
         {{ form_row(registrationForm.plainPassword, { label: 'Password' }) }}
         
-        {{ form_end(registrationForm, {'render_rest': false} ) }}  
+        {{ form_end(registrationForm) }}  
          </form>
     
 {% endblock %}

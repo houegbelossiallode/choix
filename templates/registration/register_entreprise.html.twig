@@ -10,26 +10,24 @@
      <div class="row justify-content-center">
          <div class="col-lg-5">
             <div class="card shadow-lg border-0 rounded-lg mt-5">
-             <div class="card-header"><h3 class="text-center font-weight-light my-4">Inscription</h3></div>
+             <div class="card-header"><h3 class="text-center font-weight-light my-4"><h1>Inscription Entreprise</h1></h3></div>
                 <div class="card-body">
 {% for flash_error in app.flashes('verify_email_error') %}
 <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
 {% endfor %}
-    <h1>Inscription Entreprise</h1>
-        {{ form_start(registrationForm) }}
-        <div class="row">
-        <div class="col-12"> {{ form_row(registrationForm.image) }}</div>
-        <div class="col-12"> {{ form_row(registrationForm.ifu) }}</div>
-        <div class="col-12"> {{ form_row(registrationForm.rccm) }}</div>
-        <div class="col-6"> {{ form_row(registrationForm.nom) }}</div>
-        <div class="col-6"> {{ form_row(registrationForm.adresse) }}</div>
-        <div class="col-12">   {{ form_row(registrationForm.email) }}</div>
-        </div>
-            {{ form_row(registrationForm.plainPassword, {
+    
+        {{ form_start(form) }}
+        {{ form_row(form.image) }}
+        {{ form_row(form.ifu) }}
+        {{ form_row(form.rccm) }}
+        {{ form_row(form.nom) }}
+        {{ form_row(form.adresse) }}
+        {{form_row(form.email)}}
+            {{ form_row(form.plainPassword, {
                 label: 'Password'
             }) }}
-            {{ form_row(registrationForm.agreeTerms) }}
+            {{ form_row(form.agreeTerms) }}
         
-      {{ form_rest(registrationForm ) }}       
+      {{ form_rest(form ) }}       
 
 {% endblock %}

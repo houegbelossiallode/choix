@@ -12,7 +12,7 @@
     
     {{ include('user/register_etudiant.html.twig')}}
   
-{% elseif app.request.get('type')=="entreprise"%}
+    {% elseif app.request.get('type')=="entreprise"%}
   
     {{ include('user/register_entreprise.html.twig') }}
   

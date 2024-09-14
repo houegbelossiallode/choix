@@ -13,6 +13,10 @@
          <div class="col-md-12">
              <div class="full">
                  <div class="heading_main text_align_center">
+                  
+{% for flash_error in app.flashes('success') %}
+<div class="alert alert-success" role="alert">{{ flash_error }}</div>
+{% endfor %}
                     <h2><span>Contact</span></h2>
                  </div>
                </div>
@@ -46,6 +50,7 @@
              <div class="full field">
                 <input type="number" placeholder="Numero de telephone" name="{{field_name(form.numero)}}" required />
              </div>
+             
              <div class="full field">
                 <textarea placeholder="Message" name="{{field_name(form.message)}}" required></textarea>
              </div>

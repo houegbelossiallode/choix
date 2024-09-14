@@ -3,7 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\User;
+
+use App\Form\EntrepriseType;
+use App\Form\EtudiantType;
 use App\Form\RegistrationFormType;
+use App\Form\VerificationFormType;
+use App\Form\UniversiteType;
+use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -28,54 +34,21 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    public function select(Request $request): Response
     {
-        $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
-            $user->setPassword(
-                $userPasswordHasher->hashPassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
-
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
-                (new TemplatedEmail())
-                    ->from(new Address('houegbelossiallode@gmail.com', 'Stage'))
-                    ->to($user->getEmail())
-                    ->subject('Please Confirm your Email')
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
-            );
-            // do anything else you need here, like send an email
-
-            return $this->redirectToRoute('app_home');
-        }
-
-        return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form->createView(),
-        ]);
-    }
+       
 
    
 
-    #[Route('/register/etudiant', name: 'app_etudiant')]
+        return $this->render('registration/select.html.twig' );
+    }
+
+   
+    #[Route('/register/etudiant', name: 'register_etudiant')]
     public function etudiant(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager,SluggerInterface $slugger): Response
     {
         $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
-        
-        $form->remove('num_enregistrement');
-        $form->remove('ifu');
-        $form->remove('rccm');
-    
+        $form = $this->createForm(EtudiantType::class, $user);  
         $form->handleRequest($request);
         
             if ($form->isSubmitted() && $form->isValid()) 
@@ -114,6 +87,9 @@ class RegistrationController extends AbstractController
                             $form->get('plainPassword')->getData()
                         )
                     );
+                     //Generer code de vérification
+                     $verificationCode = random_int(100000,999999);
+                     $user->setVerificationCode($verificationCode);
                     $user->setType('Etudiant');
                     $entityManager->persist($user);
                     $entityManager->flush();
@@ -127,16 +103,19 @@ class RegistrationController extends AbstractController
             ->to($user->getEmail())
             ->subject('Please Confirm your Email')
             ->htmlTemplate('registration/confirmation_email.html.twig')
+            ->context([
+                'verificationCode'=> $verificationCode
+               ])
          );
          // do anything else you need here, like send an email
                      
-                    return $this->redirectToRoute('app_login');
+         return $this->redirectToRoute('app_verify_code');
                     
                 }
                 
 
                 return $this->render('registration/register_etudiant.html.twig', [
-                    'registrationForm'=> $form->createView()
+                    'form'=> $form->createView()
                 ]); 
 
                 
@@ -144,18 +123,12 @@ class RegistrationController extends AbstractController
 
 
 
-            #[Route('/register/entreprise', name: 'app_entreprise')]
+            #[Route('/register/entreprise', name: 'register_entreprise')]
             public function entreprise(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager,SluggerInterface $slugger): Response
             {
                 $user = new User();
-                $form = $this->createForm(RegistrationFormType::class, $user);
-                
-                $form->remove('num_enregistrement');
-                $form->remove('prenom');
-                $form->remove('sexe');
-                $form->remove('filiere');
-                $form->remove('date_naissance');
-                $form->remove('ecole');
+                $form = $this->createForm(EntrepriseType::class, $user);
+               
                 
             
                 $form->handleRequest($request);
@@ -215,6 +188,9 @@ class RegistrationController extends AbstractController
                                     $form->get('plainPassword')->getData()
                                 )
                             );
+                             //Generer code de vérification
+                             $verificationCode = random_int(100000,999999);
+                             $user->setVerificationCode($verificationCode);
                             $user->setType('Entreprise');
                             $entityManager->persist($user);
                             $entityManager->flush();
@@ -223,21 +199,24 @@ class RegistrationController extends AbstractController
         
                             // generate a signed url and email it to the user
                       $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
-                     (new TemplatedEmail())
-                    ->from(new Address('houegbelossiallode@gmail.com', 'Stage'))
+                     ( new TemplatedEmail())
+                   ->from(new Address('houegbelossiallode@gmail.com', 'Stage'))
                     ->to($user->getEmail())
                     ->subject('Please Confirm your Email')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
+                    ->context([
+                        'verificationCode'=> $verificationCode
+                       ])
                  );
                  // do anything else you need here, like send an email
                              
-                            return $this->redirectToRoute('app_login');
+                 return $this->redirectToRoute('app_verify_code');
                             
                         }
                         
         
                         return $this->render('registration/register_entreprise.html.twig', [
-                            'registrationForm'=> $form->createView()
+                            'form'=> $form->createView()
                         ]); 
         
                         
@@ -245,21 +224,12 @@ class RegistrationController extends AbstractController
 
 
 
-                    #[Route('/register/universite', name: 'app_universite')]
+                    #[Route('/register/universite', name: 'register_universite')]
                     public function universite(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager,SluggerInterface $slugger): Response
                     {
                         $user = new User();
-                        $form = $this->createForm(RegistrationFormType::class, $user);
+                        $form = $this->createForm(UniversiteType::class, $user);
                         
-                            $form->remove('ifu');
-                            $form->remove('prenom');
-                            $form->remove('sexe');
-                            $form->remove('filiere');
-                            $form->remove('date_naissance');
-                            $form->remove('ecole');
-                        
-                        
-                    
                         $form->handleRequest($request);
                         
                             if ($form->isSubmitted() && $form->isValid()) 
@@ -312,6 +282,10 @@ class RegistrationController extends AbstractController
                                             $form->get('plainPassword')->getData()
                                         )
                                     );
+                                    
+                                    //Generer code de vérification
+                                    $verificationCode = random_int(100000,999999);
+                                    $user->setVerificationCode($verificationCode);
                                     $user->setType('Universite');
                                     $entityManager->persist($user);
                                     $entityManager->flush();
@@ -325,30 +299,55 @@ class RegistrationController extends AbstractController
                             ->to($user->getEmail())
                             ->subject('Please Confirm your Email')
                             ->htmlTemplate('registration/confirmation_email.html.twig')
+                            ->context([
+                                'verificationCode'=> $verificationCode
+                               ])
                          );
                          // do anything else you need here, like send an email
                                      
-                                    return $this->redirectToRoute('app_login');
+                                    return $this->redirectToRoute('app_verify_code');
                                     
                                 }
                                 
                 
                                 return $this->render('registration/register_universite.html.twig', [
-                                    'registrationForm'=> $form->createView()
+                                    'form'=> $form->createView()
                                 ]); 
                 
                                 
                             }
 
+                            #[Route('/verify-code', name: 'app_verify_code')]
+                            public function verify(Request $request, UserRepository   $userRepository, EntityManagerInterface $entityManager): Response
+                        {
+                            $form = $this->createForm(VerificationFormType::class);
+                            $form->handleRequest($request);
 
+                            if ($form->isSubmitted() && $form->isValid()) {
+                                $verificationCode = $form->get('VerificationCode')->getData();
+                                $user = $userRepository->findOneBy(['VerificationCode' => $verificationCode]);
 
+                                if ($user) {
+                                    // Verify user
+                                    $user->setIsVerified(true);
+                                    $user->setVerificationCode(null);
+                                    $entityManager->flush();
 
+                                    // Redirect to login page
+                                    $this->addFlash('success', 'Vôtre compte a été vérifié avec succès');
+                                    return $this->redirectToRoute('app_login');
+                                } else {
+                                    $this->addFlash('error', 'Invalid verification code');
+                                }
+                            }
 
+                            return $this->render('registration/verify.html.twig', [
+                                'form' => $form->createView(),
+                            ]);
+                        }
+                    
 
-            
-
-
-
+                        
             #[Route('/verify/email', name: 'app_verify_email')]
             public function verifyUserEmail(Request $request, TranslatorInterface $translator): Response
             {

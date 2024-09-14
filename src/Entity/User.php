@@ -86,6 +86,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Notifications::class,orphanRemoval: true, cascade: ['persist'])]
     private Collection $notifications;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $VerificationCode = null;
+
     public function __construct()
     {
         $this->stages = new ArrayCollection();
@@ -469,6 +472,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $notification->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getVerificationCode(): ?int
+    {
+        return $this->VerificationCode;
+    }
+
+    public function setVerificationCode(?int $VerificationCode): static
+    {
+        $this->VerificationCode = $VerificationCode;
 
         return $this;
     }

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vérification{% endblock %}
+
+{% block body %}
+<style>
+    .flash-message {
+        padding: 10px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        margin-bottom: 20px;
+        opacity: 1;
+        transition: opacity 0.5s ease-in-out;
+    }
+    .flash-success {
+        color: #155724;
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+    }
+</style>
+
+
+<div id="flash-messages">
+    {% for flash_error in app.flashes('error') %}
+    <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+</div>
+
+<div id="layoutAuthentication">
+ <div id="layoutAuthentication_content">
+    <main>
+    <div class="container">
+     <div class="row justify-content-center">
+         <div class="col-lg-5">
+            <div class="card shadow-lg border-0 rounded-lg mt-5">
+             <div class="card-header"><h3 class="text-center font-weight-light my-4">Vérification</h3></div>
+                <div class="card-body">
+    {{ form_start(form) }}
+    {{ form_row(form.VerificationCode) }}
+    {{ form_rest(form) }}
+
+
+    <script>
+        //alert('bonjour');
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(function() {
+                var flashMessages = document.getElementById('flash-messages');
+                if (flashMessages) {
+                    flashMessages.style.opacity = '0';
+                    setTimeout(function() {
+                        flashMessages.remove();
+                    }, 500); // Le temps de transition pour l'opacité
+                }
+            }, 10000); // 10 secondes
+        });
+    </script>
+{% endblock %}
